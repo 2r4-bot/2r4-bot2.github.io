@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recibo con Cálculo en Tiempo Real</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('cheve.png'); /* Cambia 'cheve.png' por la ruta de tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .recibo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative; /* Esto permite que el logo se posicione dentro de este contenedor */
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+        }
+        .detalles table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .detalles th, .detalles td {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+        .totales {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .totales .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function calcularTotal() {
+            let precios = {
+                'mega': 460,
+                'megaModelo': 480,
+                'fam': 400,
+                'media': 360,
+                'latonVictoria': 470,
+                'latonModelo': 480,
+                'coronaLight': 350
+            };
+
+            let total = 0;
+            
+            for (let producto in precios) {
+                let cantidad = document.getElementById(producto).value;
+                total += cantidad * precios[producto];
+            }
+            
+            document.getElementById('total').innerText = '$' + total.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="recibo-container">
+        <!-- Logo en la esquina superior derecha -->
+        <img src="che.jpg" alt="Logo" class="logo"> <!-- Cambia 'logo.png' por la ruta de tu logo -->
+
+        <h1>CHEVES "INGENIEBRIOS"</h1>
+        
+        <div class="detalles">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descripción</th>
+                        <th>Precio Unitario</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mega</td>
+                        <td>$460.00</td>
+                        <td><input type="number" id="mega" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-mega"></td>
+                    </tr>
+                    <tr>
+                        <td>Mega Modelo</td>
+                        <td>$480.00</td>
+                        <td><input type="number" id="megaModelo" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-megaModelo"></td>
+                    </tr>
+                    <tr>
+                        <td>Familiar</td>
+                        <td>$400.00</td>
+                        <td><input type="number" id="fam" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-fam"></td>
+                    </tr>
+                    <tr>
+                        <td>Media</td>
+                        <td>$360.00</td>
+                        <td><input type="number" id="media" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-media"></td>
+                    </tr>
+                    <tr>
+                        <td>Latón Victoria</td>
+                        <td>$470.00</td>
+                        <td><input type="number" id="latonVictoria" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-latonVictoria"></td>
+                    </tr>
+                    <tr>
+                        <td>Latón Modelo</td>
+                        <td>$480.00</td>
+                        <td><input type="number" id="latonModelo" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-latonModelo"></td>
+                    </tr>
+                    <tr>
+                        <td>Corona Light</td>
+                        <td>$350.00</td>
+                        <td><input type="number" id="coronaLight" value="0" min="0" oninput="calcularTotal()"></td>
+                        <td id="subtotal-coronaLight"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="totales">
+            <p class="total"><strong>Total a pagar:</strong> <span id="total">$0.00</span></p>
+        </div>
+    </div>
+
+</body>
+</html>
